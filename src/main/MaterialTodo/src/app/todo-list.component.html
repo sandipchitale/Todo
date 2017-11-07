@@ -1,0 +1,25 @@
+<mat-card>
+  <mat-list>
+    <mat-list-item>
+      <button mat-icon-button color="warn"
+              (click)="removeCompleted()"
+              [disabled]="hideCompleted.checked || zeroCompletedTodos()"
+              title="Clear completed Todos"><mat-icon>clear</mat-icon></button>
+      <mat-slide-toggle #hideCompleted>Hide Completed</mat-slide-toggle>
+    </mat-list-item>
+    <mat-list-item *ngFor="let todo of  (hideCompleted.checked ? sansCompletedTodos() : todos)">
+      <button mat-icon-button color="warn" (click)="removeTodo(todo)"><mat-icon>delete</mat-icon></button>
+      <mat-checkbox [(ngModel)]="todo.completed" (change)="updateTodo(todo)" ><span [ngClass]="{'todo-done': todo.completed}">{{todo.title}}</span></mat-checkbox>
+    </mat-list-item>
+    <mat-list-item>
+    </mat-list-item>
+    <mat-list-item>
+      <form>
+        <button mat-icon-button [disabled]="title.trim().length === 0" (click)="addTodo()"><mat-icon>add</mat-icon></button>
+        <mat-input-container>
+          <input name="title" matInput placeholder="Enter Todo item" [(ngModel)]="title">
+        </mat-input-container>
+      </form>
+    </mat-list-item>
+  </mat-list>
+</mat-card>
