@@ -25,3 +25,4 @@ nbdist/
 
 ### frontend generated
 src/main/resources/static
+src/main/MaterialTodo/package-lock.json
