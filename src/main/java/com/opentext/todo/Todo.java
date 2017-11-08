@@ -29,8 +29,15 @@ public class Todo {
         this.completed = completed;
     }
 
+    
     public void merge(Todo item) {
         setTitle(item.getTitle());
         setCompleted(item.isCompleted());
+    }
+    
+    static Todo from(String title) {
+    	Todo todo = new Todo();
+    	todo.title = title;
+    	return todo;
     }
 }

@@ -6,6 +6,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Predicate;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -16,6 +18,16 @@ class InMemoryTodoRepository implements TodoRepository {
     @Override
     public Collection<Todo> findAll() {
         return map.values();
+    }
+    
+    @PostConstruct
+    void init() {
+    	insert(Todo.from("Get Milk"));
+    	insert(Todo.from("Get Bread"));
+    	insert(Todo.from("Get Sugar"));
+    	insert(Todo.from("Get Silk"));
+    	insert(Todo.from("Clean Garage"));
+    	insert(Todo.from("Clean Attic"));
     }
 
     @Override
@@ -54,9 +66,9 @@ class InMemoryTodoRepository implements TodoRepository {
         });
     }
 
-    private void checkIfExists(Long TodoId) {
-        if (!map.containsKey(TodoId)) {
-            throw new TodoNotFoundException(TodoId);
+    private void checkIfExists(Long todoId) {
+        if (!map.containsKey(todoId)) {
+            throw new TodoNotFoundException(todoId);
         }
     }
 }
